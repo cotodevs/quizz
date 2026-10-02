@@ -415,9 +415,6 @@
 
     btnAtras.disabled = (actual === 0);
 
-    var req = pasos[actual].getAttribute('data-req') === '1';
-    btnOmitir.style.display = req ? 'none' : 'block';
-
     btnSig.textContent = (actual === total-1) ? '¡Terminar y ganar! 🏁' : 'Siguiente →';
 
     // enfocar el input del paso
@@ -458,10 +455,6 @@
 
   btnSig.addEventListener('click', avanzar);
   btnAtras.addEventListener('click', retroceder);
-  btnOmitir.addEventListener('click', function(){
-    if (actual === total - 1){ finalizar(); return; }
-    actual++; render();
-  });
 
   // Enter avanza (y nunca envía el formulario a ningún lado)
   form.addEventListener('submit', function(e){ e.preventDefault(); avanzar(); });
