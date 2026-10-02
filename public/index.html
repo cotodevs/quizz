@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Promo COTONEB — Registro</title>
+<style>
+  :root{
+    --verde:#30A850;
+    --verde-claro:#4CC066;
+    --verde-oscuro:#248040;
+    --azul:#103058;
+    --azul-claro:#1c4a83;
+    --fondo:#EEF2F6;
+    --gris:#5b6472;
+    --gris-borde:#d7dde5;
+    --blanco:#ffffff;
+    --rojo:#C62828;
+    --rojo-oscuro:#8E1A1A;
+    --rojo-fondo:#FBE9E9;
+    --sombra:0 10px 30px rgba(16,48,88,.12);
+    --sombra-sm:0 2px 8px rgba(16,48,88,.08);
+    --radio:16px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{
+    background:var(--fondo);
+    color:var(--azul);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    -webkit-text-size-adjust:100%;
+  }
+
+  body{
+    min-height:100vh;
+    min-height:100dvh;
+    padding:0 clamp(12px,4vw,16px) clamp(24px,6vw,40px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow-x:hidden;
+    background-image:radial-gradient(circle at 50% -10%, rgba(48,168,80,.10), transparent 55%);
+  }
+
+  .wrap{width:100%;max-width:460px;margin:0 auto}
+
+  /* ===== Barra superior corporativa ===== */
+  .topbar{
+    height:6px;width:100%;
+    background:linear-gradient(90deg,var(--azul),var(--verde));
+  }
+
+  /* ===== Header con logo ===== */
+  .header{
+    text-align:center;
+    padding:22px 0 8px;
+  }
+  .header img{
+    width:100%;
+    max-width:clamp(200px,60vw,260px);
+    height:auto;
+    display:block;
+    margin:0 auto;
+  }
+
+  /* ===== Tarjeta ===== */
+  .card{
+    background:var(--blanco);
+    border-radius:var(--radio);
+    box-shadow:var(--sombra);
+    padding:0;
+    width:100%;
+    overflow:hidden;
+    border:1px solid #e6ebf1;
+  }
+  .card-top{
+    background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+    color:#fff;
+    padding:22px 20px 20px;
+  }
+  .pill{
+    display:inline-block;background:var(--verde);color:#fff;font-size:11.5px;font-weight:700;
+    padding:5px 11px;border-radius:999px;letter-spacing:.5px;margin-bottom:12px;text-transform:uppercase;
+  }
+  .card-top h1{font-size:clamp(19px,5.2vw,23px);line-height:1.25;color:#fff;margin-bottom:8px;font-weight:800}
+  .card-top .sub{color:rgba(255,255,255,.85);font-size:clamp(13px,3.6vw,15px)}
+
+  .card-body{padding:22px 20px}
+
+  /* ===== Progreso ===== */
+  .progreso{margin-bottom:22px}
+  .progreso .meta{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:12px;color:var(--gris);font-weight:600;margin-bottom:8px;
+  }
+  .progreso .barra{
+    height:7px;background:#e8edf2;border-radius:999px;overflow:hidden;
+  }
+  .progreso .fill{
+    height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--verde),var(--verde-claro));
+    transition:width .35s ease;
+  }
+
+  /* ===== Pasos (una pregunta a la vez) ===== */
+  .paso{display:none;animation:entra .32s ease}
+  .paso.activo{display:block}
+  @keyframes entra{
+    from{opacity:0;transform:translateX(14px)}
+    to{opacity:1;transform:translateX(0)}
+  }
+
+  .paso .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;background:var(--verde);color:#fff;
+    font-size:13px;font-weight:800;margin-bottom:12px;
+  }
+  label.q{display:block;font-weight:800;font-size:clamp(16px,4.6vw,19px);margin-bottom:4px;color:var(--azul)}
+  .opt{font-size:12.5px;color:var(--gris);font-weight:600}
+  input{
+    width:100%;margin-top:12px;padding:15px 16px;font-size:16px; /* 16px evita zoom iOS */
+    border:1.5px solid var(--gris-borde);border-radius:12px;background:#fff;color:var(--azul);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px rgba(48,168,80,.15)}
+  .hint{font-size:11.5px;color:var(--gris);margin-top:8px}
+  .error{font-size:12.5px;color:var(--rojo);margin-top:8px;font-weight:600;display:none}
+  .error.ver{display:block}
+
+  /* ===== Botones ===== */
+  .acciones{display:flex;gap:10px;margin-top:24px}
+  .btn{
+    flex:1;padding:15px;font-size:16px;font-weight:800;border:none;border-radius:12px;cursor:pointer;
+    transition:transform .08s, box-shadow .15s;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-primario{
+    color:#fff;background:linear-gradient(135deg,var(--verde),var(--verde-claro));
+    box-shadow:0 6px 16px rgba(48,168,80,.35);
+  }
+  .btn-sec{
+    flex:0 0 auto;min-width:92px;color:var(--azul);background:#eef2f6;border:1.5px solid var(--gris-borde);
+  }
+  .btn-sec[disabled]{opacity:.45;cursor:not-allowed}
+  .omitir{
+    display:block;text-align:center;margin-top:14px;font-size:13px;color:var(--gris);
+    background:none;border:none;cursor:pointer;text-decoration:underline;width:100%;
+  }
+
+  .legal{text-align:center;font-size:11px;color:var(--gris);margin-top:16px;opacity:.85}
+
+  /* ===== Reveal ===== */
+  #reveal{display:none}
+  body.revelado{background:var(--rojo-fondo);background-image:none}
+
+  .alerta{
+    background:#fff;border-radius:var(--radio);box-shadow:var(--sombra);overflow:hidden;
+    width:100%;border:2px solid var(--rojo);margin-top:18px;
+  }
+  .alerta .cabecera{
+    background:linear-gradient(135deg,var(--rojo),var(--rojo-oscuro));color:#fff;
+    padding:24px 20px;text-align:center;
+  }
+  .alerta .cabecera .calavera{display:block;margin:0 auto 10px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+  .alerta .cabecera h2{font-size:21px;line-height:1.25}
+  .alerta .cuerpo{padding:22px 20px}
+
+  .ok-nota{
+    background:#E7F6EC;border:1px solid #bfe6cb;border-radius:12px;padding:13px 15px;
+    color:#1e6b36;font-size:14px;font-weight:600;margin-bottom:18px;
+  }
+  .entregado-titulo{font-weight:800;color:var(--rojo-oscuro);font-size:15px;margin-bottom:10px}
+  .datos{
+    background:var(--fondo);border:1px dashed var(--rojo);border-radius:12px;
+    padding:6px 15px;margin-bottom:18px;
+  }
+  .datos .fila{
+    display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:14px;
+    border-bottom:1px solid #e3e8ee;
+  }
+  .datos .fila:last-child{border-bottom:none}
+  .datos .k{color:var(--gris);font-weight:600;flex:0 0 auto}
+  .datos .v{color:var(--azul);font-weight:800;text-align:right;word-break:break-word}
+
+  .parrafo{font-size:14px;color:var(--azul);margin-bottom:16px}
+  .parrafo strong{color:var(--rojo-oscuro)}
+
+  .senales{background:#fff;border:1px solid #f0c9c9;border-radius:12px;padding:15px;margin-bottom:18px}
+  .senales h3{font-size:14px;color:var(--rojo-oscuro);margin-bottom:10px}
+  .senales ul{list-style:none}
+  .senales li{font-size:13.5px;color:var(--azul);padding:6px 0 6px 24px;position:relative}
+  .senales li::before{content:"⚠";position:absolute;left:0;top:6px;color:var(--rojo)}
+
+  .cierre{
+    text-align:center;font-size:14px;font-weight:700;color:var(--verde);
+    border-top:2px solid var(--fondo);padding-top:16px;margin-top:4px;
+  }
+  .cierre .firma{display:block;color:var(--gris);font-weight:600;font-size:12px;margin-top:4px}
+  .btn-rojo{width:100%;margin-top:18px;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-claro));box-shadow:0 6px 16px rgba(16,48,88,.3)}
+
+  /* ===== Modal "VOLVISTE A CAER" ===== */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:100;display:none;
+    align-items:center;justify-content:center;padding:24px;
+    background:rgba(8,10,16,.85);
+  }
+  .modal-overlay.ver{display:flex;animation:fadeIn .25s ease}
+  .modal-box{
+    width:100%;max-width:380px;text-align:center;color:#fff;
+    background:linear-gradient(160deg,#C62828,#7A1414);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;padding:34px 24px 26px;
+    box-shadow:0 24px 70px rgba(0,0,0,.55);
+    animation:pop .4s cubic-bezier(.2,.8,.25,1.15);
+  }
+  .modal-box .calavera{display:block;margin:0 auto 14px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.4))}
+  .modal-box h2{
+    font-size:clamp(28px,9vw,38px);font-weight:900;line-height:1.05;
+    letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;
+  }
+  .modal-box p{font-size:clamp(15px,4.4vw,17px);line-height:1.4;opacity:.95;margin-bottom:24px}
+  .modal-box button{
+    width:100%;padding:15px;font-size:16px;font-weight:800;cursor:pointer;
+    border:none;border-radius:12px;color:#8E1A1A;background:#fff;
+    box-shadow:0 6px 16px rgba(0,0,0,.25);transition:transform .08s;
+  }
+  .modal-box button:active{transform:scale(.98)}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+
+  .datos .fila{flex-wrap:wrap}
+
+  @media (max-width:400px){
+    .card-body,.alerta .cuerpo,.card-top{padding-left:15px;padding-right:15px}
+    .datos .fila{flex-direction:column;align-items:flex-start;gap:2px}
+    .datos .v{text-align:left}
+    .acciones{flex-wrap:wrap}
+    .btn-sec{flex:1 1 100%;order:2}
+    .btn-primario{order:1}
+  }
+
+  @media (min-width:600px){
+    .wrap{max-width:480px}
+    .header{padding-top:32px}
+  }
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<div class="wrap">
+
+  <div class="header">
+    <img src="logo contorno.png" alt="COTONEB — La cooperativa de todos">
+  </div>
+
+  <!-- ===================== PANTALLA 1: CEBO (wizard) ===================== -->
+  <section id="promo" class="card" aria-live="polite">
+    <div class="card-top">
+      <span class="pill">⚡ Quiz · Capacitación de Ciberseguridad</span>
+      <h1>¡El primero en terminar gana!</h1>
+      <p class="sub">Quiz relámpago de la capacitación. Responde rápido y sin parar: el primer colaborador en completarlo se lleva el premio.</p>
+    </div>
+
+    <div class="card-body">
+      <div class="progreso">
+        <div class="meta">
+          <span>Paso <b id="pasoActual">1</b> de <span id="pasoTotal">6</span></span>
+          <span id="pasoPct">17%</span>
+        </div>
+        <div class="barra"><div class="fill" id="progFill"></div></div>
+      </div>
+
+      <form id="formRegistro" novalidate>
+
+        <!-- Paso 1 -->
+        <div class="paso activo" data-req="1">
+          <span class="num">1</span>
+          <label class="q" for="nombre">¿Cuál es tu nombre completo?</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="off" placeholder="Ej. María López García">
+          <div class="error">Por favor escribe tu nombre para continuar.</div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="paso" data-req="1">
+          <span class="num">2</span>
+          <label class="q" for="correo">¿A qué correo te avisamos si ganas?</label>
+          <input type="email" id="correo" name="correo" autocomplete="off" inputmode="email" placeholder="tucorreo@ejemplo.com">
+          <div class="error">Escribe un correo para continuar.</div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="paso" data-req="1">
+          <span class="num">3</span>
+          <label class="q" for="telefono">¿Tu número de teléfono?</label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="off" inputmode="tel" placeholder="Ej. 5555-5555">
+          <div class="error">Escribe tu teléfono para continuar.</div>
+        </div>
+
+        <!-- Paso 4 -->
+        <div class="paso" data-req="1">
+          <span class="num">4</span>
+          <label class="q" for="puesto">¿Cuál es tu puesto o cargo?</label>
+          <input type="text" id="puesto" name="puesto" autocomplete="off" placeholder="Ej. Asesor de créditos">
+          <div class="error">Escribe tu puesto para continuar.</div>
+        </div>
+
+        <!-- Paso 5 -->
+        <div class="paso" data-req="1">
+          <span class="num">5</span>
+          <label class="q" for="agencia">¿En qué agencia o departamento estás?</label>
+          <input type="text" id="agencia" name="agencia" autocomplete="off" placeholder="Ej. Agencia Central">
+          <div class="error">Escribe tu agencia para continuar.</div>
+        </div>
+
+        <!-- Paso 6 -->
+        <div class="paso" data-req="1">
+          <span class="num">6</span>
+          <label class="q" for="codigo">¿Cuál es tu ID de usuario de T24?</label>
+          <input type="text" id="codigo" name="codigo" autocomplete="off" inputmode="numeric" pattern="[0-9]*" placeholder="Ej. 10234">
+          <div class="error">Escribe tu ID de T24 para continuar.</div>
+        </div>
+
+        <div class="acciones">
+          <button type="button" class="btn btn-sec" id="btnAtras" disabled>← Atrás</button>
+          <button type="button" class="btn btn-primario" id="btnSiguiente">Siguiente →</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA 2: REVEAL ===================== -->
+  <section id="reveal" aria-live="assertive">
+    <div class="alerta">
+      <div class="cabecera">
+        <svg class="calavera" viewBox="0 0 100 100" width="84" height="84" aria-hidden="true">
+          <path fill="#ffffff" d="M50 10c-21 0-34 15-34 34 0 12 6 21 14 26v8c0 3 2 5 5 5h30c3 0 5-2 5-5v-8c8-5 14-14 14-26 0-19-13-34-34-34z"/>
+          <ellipse cx="37" cy="46" rx="8.5" ry="10.5" fill="#7a1414"/>
+          <ellipse cx="63" cy="46" rx="8.5" ry="10.5" fill="#7a1414"/>
+          <path fill="#7a1414" d="M50 55l-5.5 11h11z"/>
+          <g fill="#7a1414">
+            <rect x="41.5" y="77" width="2.4" height="9"/>
+            <rect x="48.8" y="77" width="2.4" height="9"/>
+            <rect x="56.1" y="77" width="2.4" height="9"/>
+          </g>
+        </svg>
+        <h2>Esto era una simulación de COTONEB.</h2>
+      </div>
+      <div class="cuerpo">
+        <div class="ok-nota">✅ Tranquilo: no se guardó ni se envió ningún dato.</div>
+
+        <div class="entregado-titulo">Si fuera un atacante real, le acabas de entregar:</div>
+        <div class="datos" id="datosEntregados"></div>
+
+        <p class="parrafo">Con eso se harían pasar por COTONEB y te pedirían el siguiente dato… hasta llegar a tu dinero.</p>
+
+        <div class="cierre">
+          Verifica siempre antes de dar tus datos.
+          <span class="firma">— Equipo de Seguridad, COTONEB</span>
+        </div>
+
+        <button type="button" class="btn btn-rojo" id="btnReiniciar">Volver al inicio</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MODAL: VOLVISTE A CAER ===================== -->
+  <div class="modal-overlay" id="modalCaiste" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="modal-box">
+      <svg class="calavera" viewBox="0 0 100 100" width="76" height="76" aria-hidden="true">
+        <path fill="#ffffff" d="M50 10c-21 0-34 15-34 34 0 12 6 21 14 26v8c0 3 2 5 5 5h30c3 0 5-2 5-5v-8c8-5 14-14 14-26 0-19-13-34-34-34z"/>
+        <ellipse cx="37" cy="46" rx="8.5" ry="10.5" fill="#7a1414"/>
+        <ellipse cx="63" cy="46" rx="8.5" ry="10.5" fill="#7a1414"/>
+        <path fill="#7a1414" d="M50 55l-5.5 11h11z"/>
+        <g fill="#7a1414">
+          <rect x="41.5" y="77" width="2.4" height="9"/>
+          <rect x="48.8" y="77" width="2.4" height="9"/>
+          <rect x="56.1" y="77" width="2.4" height="9"/>
+        </g>
+      </svg>
+      <h2 id="modalTitulo">¡Volviste a caer!</h2>
+      <p>Y estando en una capacitación de ciberseguridad.</p>
+      <button type="button" id="btnModalFinalizar">Finalizar</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var form      = document.getElementById('formRegistro');
+  var pasos     = Array.prototype.slice.call(form.querySelectorAll('.paso'));
+  var total     = pasos.length;
+  var actual    = 0;
+
+  var btnAtras  = document.getElementById('btnAtras');
+  var btnSig    = document.getElementById('btnSiguiente');
+
+  document.getElementById('pasoTotal').textContent = total;
+
+  function esc(txt){ var d=document.createElement('div'); d.textContent=txt; return d.innerHTML; }
+
+  function render(){
+    pasos.forEach(function(p,i){ p.classList.toggle('activo', i===actual); });
+
+    var pct = Math.round(((actual) / total) * 100); // progreso al entrar al paso
+    pct = Math.max(pct, Math.round((1/total)*100));
+    document.getElementById('progFill').style.width = (((actual+1)/total)*100) + '%';
+    document.getElementById('pasoActual').textContent = actual + 1;
+    document.getElementById('pasoPct').textContent = Math.round(((actual+1)/total)*100) + '%';
+
+    btnAtras.disabled = (actual === 0);
+
+    var req = pasos[actual].getAttribute('data-req') === '1';
+    btnOmitir.style.display = req ? 'none' : 'block';
+
+    btnSig.textContent = (actual === total-1) ? '¡Terminar y ganar! 🏁' : 'Siguiente →';
+
+    // enfocar el input del paso
+    var inp = pasos[actual].querySelector('input');
+    if (inp) setTimeout(function(){ inp.focus(); }, 60);
+  }
+
+  function limpiarError(){
+    var e = pasos[actual].querySelector('.error');
+    if (e) e.classList.remove('ver');
+  }
+
+  function validarPaso(){
+    var req = pasos[actual].getAttribute('data-req') === '1';
+    if (!req) return true;
+    var inp = pasos[actual].querySelector('input');
+    var val = (inp.value || '').trim();
+    if (!val){
+      var e = pasos[actual].querySelector('.error');
+      if (e) e.classList.add('ver');
+      inp.focus();
+      return false;
+    }
+    return true;
+  }
+
+  function avanzar(){
+    if (!validarPaso()) return;
+    if (actual === total - 1){ finalizar(); return; }
+    actual++;
+    render();
+  }
+  function retroceder(){
+    if (actual === 0) return;
+    actual--;
+    render();
+  }
+
+  btnSig.addEventListener('click', avanzar);
+  btnAtras.addEventListener('click', retroceder);
+  btnOmitir.addEventListener('click', function(){
+    if (actual === total - 1){ finalizar(); return; }
+    actual++; render();
+  });
+
+  // Enter avanza (y nunca envía el formulario a ningún lado)
+  form.addEventListener('submit', function(e){ e.preventDefault(); avanzar(); });
+  form.addEventListener('input', limpiarError);
+
+  /* ---------- Campos a revelar ---------- */
+  var CAMPOS = [
+    {id:'nombre',   etq:'Nombre'},
+    {id:'correo',   etq:'Correo'},
+    {id:'telefono', etq:'Teléfono'},
+    {id:'puesto',   etq:'Puesto'},
+    {id:'agencia',  etq:'Agencia'},
+    {id:'codigo',   etq:'ID de T24'}
+  ];
+
+  var modal = document.getElementById('modalCaiste');
+
+  /* ---------- Terminar el quiz: arma el reveal en memoria y abre el modal ---------- */
+  function finalizar(){
+    var cont = document.getElementById('datosEntregados');
+    cont.innerHTML = '';
+    CAMPOS.forEach(function(c){
+      var val = (document.getElementById(c.id).value || '').trim();
+      var fila = document.createElement('div');
+      fila.className = 'fila';
+      fila.innerHTML = '<span class="k">' + esc(c.etq) + '</span>' +
+                       '<span class="v">' + (val ? esc(val) : '(en blanco)') + '</span>';
+      cont.appendChild(fila);
+    });
+    modal.classList.add('ver'); // golpe: "¡Volviste a caer!"
+  }
+
+  /* ---------- Botón "Finalizar" del modal: muestra el reveal con lo entregado ---------- */
+  document.getElementById('btnModalFinalizar').addEventListener('click', function(){
+    modal.classList.remove('ver');
+    document.getElementById('promo').style.display = 'none';
+    document.getElementById('reveal').style.display = 'block';
+    document.body.classList.add('revelado');
+    window.scrollTo(0,0);
+  });
+
+  /* ---------- Reinicio: descarta datos de memoria ---------- */
+  document.getElementById('btnReiniciar').addEventListener('click', function(){
+    form.reset();
+    modal.classList.remove('ver');
+    document.getElementById('datosEntregados').innerHTML = '';
+    document.getElementById('reveal').style.display = 'none';
+    document.getElementById('promo').style.display = 'block';
+    document.body.classList.remove('revelado');
+    actual = 0;
+    render();
+    window.scrollTo(0,0);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "cotoneb-phishing-sim",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simulación educativa y autorizada de concientización de phishing para COTONEB. Sirve una página estática; no captura ni transmite datos.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
